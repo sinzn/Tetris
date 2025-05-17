@@ -1,0 +1,126 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tetris</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <style>
+    /* Hide native focus outline for buttons but keep accessibility */
+    button:focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+    /* Equal height and width for all three containers */
+    #leaderboard,
+    #game-container-section,
+    #instructions {
+      min-height: 520px;
+      width: 280px;
+    }
+    /* Scrollbar for leaderboard if needed */
+    #leaderboard {
+      max-height: 480px;
+      overflow-y: auto;
+    }
+    /* Smaller font size for leaderboard and instructions */
+    #leaderboard,
+    #instructions {
+      font-size: 0.75rem; /* text-xs */
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4 select-none">
+  <h1 class="font-extrabold text-2xl mb-6 text-center w-full">Tetris</h1>
+  <div class="flex flex-col md:flex-row w-full max-w-7xl gap-6 justify-center">
+    <!-- Leaderboard Left -->
+    <section
+      id="leaderboard"
+      class="bg-white rounded-lg shadow-lg p-4 flex-shrink-0"
+      aria-label="Leaderboard"
+    >
+      <h2 class="font-bold text-lg mb-3 text-center">Leaderboard</h2>
+      <ol class="list-decimal list-inside space-y-1 text-gray-700" id="leaderboard-list" role="list">
+        <!-- Leaderboard entries inserted by JS -->
+      </ol>
+    </section>
+
+    <!-- Center Game -->
+    <section
+      id="game-container-section"
+      class="flex flex-col items-center bg-white rounded-lg shadow-lg p-4 flex-shrink-0"
+      aria-label="Game Container"
+    >
+      <div
+        id="game-container"
+        class="relative"
+        style="width: 240px; height: 480px;"
+      >
+        <canvas
+          id="tetris"
+          width="240"
+          height="480"
+          class="block mx-auto"
+          aria-label="Tetris game grid with colorful blocks"
+          role="img"
+        ></canvas>
+      </div>
+      <p class="font-bold mt-3 text-center text-sm">
+        Score: <span id="score">0</span>
+      </p>
+      <p class="text-center text-xs mt-1">
+        Level: <span id="level">1</span>
+      </p>
+      <p class="text-center text-[9px] text-gray-500 mt-1 select-none">
+        Press Up Arrow to rotate the block
+      </p>
+      <p id="game-over" class="text-center text-red-600 font-bold mt-2 hidden">
+        Game Over!
+      </p>
+      <div class="flex gap-3 mt-3">
+        <button
+          id="play-again"
+          class="bg-black text-white text-xs px-3 py-1 rounded-md hover:bg-gray-800 transition"
+          type="button"
+          aria-label="Play Again"
+        >
+          Play Again
+        </button>
+        <button
+          id="play-music"
+          class="bg-black text-white text-xs px-3 py-1 rounded-md flex items-center gap-1 hover:bg-gray-800 transition"
+          type="button"
+          aria-label="Play Music"
+        >
+          <i class="fas fa-music text-xs"></i> Play Music
+        </button>
+      </div>
+      <audio id="bg-music" src="./Tetris.mp3" loop></audio>
+    </section>
+
+    <!-- Instructions Right -->
+    <section
+      id="instructions"
+      class="bg-white rounded-lg shadow-lg p-4 flex-shrink-0"
+      aria-label="Game Instructions"
+    >
+      <h2 class="font-bold text-lg mb-3 text-center">Instructions</h2>
+      <ul class="list-disc list-inside space-y-2 text-gray-700">
+        <li><strong>Arrow Left:</strong> Move block left</li>
+        <li><strong>Arrow Right:</strong> Move block right</li>
+        <li><strong>Arrow Down or Space:</strong> Drop block faster</li>
+        <li><strong>Arrow Up:</strong> Rotate block</li>
+        <li>Clear lines to score points</li>
+        <li>Level increases every 10 lines cleared</li>
+        <li>Game ends when blocks reach the top</li>
+        <li>Click "Play Again" to restart</li>
+        <li>Click "Play Music" to toggle background sound</li>
+      </ul>
+    </section>
+  </div>
+  <script src="./script.js"></script>
+</body>
+</html>
